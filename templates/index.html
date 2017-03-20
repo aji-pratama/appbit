@@ -1,14 +1,4 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Hahaha</title>
-    <link rel="stylesheet" href="{% static '/css/bootstrap.css' %}" media="screen" title="no title">
-  </head>
-  <body>
+{% extends "base/base_front.html" %}
+{% block content %}
     This is Index
-    <button type="button" name="button" class="btn btn-info">Haha
-    </button>
-  </body>
-</html>
+{% endblock %}
