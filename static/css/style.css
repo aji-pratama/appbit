@@ -7,5 +7,7 @@
  */
 
 .main-content{
-  margin-top: 60px;
+  margin: 70px;
+  padding: 40px;
+  /*border: 1px solid #ddd;*/
 }

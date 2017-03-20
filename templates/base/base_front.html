@@ -27,20 +27,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand topnav" href="#">AppBit</a>
+                <a class="navbar-brand topnav" href="{% url 'account:index' %}">AppBit</a>
               </li>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#">About</a>
+                        <a href="{% url 'account:register' %}">Sign Up</a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
+                        <a href="{% url 'account:login' %}">Sign In</a>
                     </li>
-                    <li>
-                        <a href="#">Contact</a>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
