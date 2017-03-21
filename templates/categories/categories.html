@@ -1,0 +1,73 @@
+{% extends "base/base_front.html" %}
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+
+      {% if success %}
+      <div class="alert alert-success">
+        <strong>Success!</strong> Indicates a successful or positive action.
+      </div>
+      {% else %}
+      
+      {% endif %}
+
+      <h3>Category <small> <a href="{% url 'products:create_category' %}" class="btn btn-warning btn-sm">New Category</a></small></h3>
+
+<form class="form-inline" action="{% url 'products:categories' %}" method="POST">{% csrf_token %}
+  <div class="form-group">
+    <input class="form-control" name="q" type="text" placeholder="Search">
+    <input type="submit" name="search" value="Search" class="btn btn-primary">
+  </div>
+</form>
+
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Parent</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cat in categories %}
+          <tr>
+            <td>{{ cat.title }}</td>
+            <td>
+              {% if cat.parent %}
+                {{ cat.parent }}
+              {% else %}
+
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  {% if categories.has_other_pages %}
+    <ul class="pagination">
+      {% if categories.has_previous %}
+        <li><a href="?page={{ categories.previous_page_number }}">&laquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>&laquo;</span></li>
+      {% endif %}
+      {% for i in categories.paginator.page_range %}
+        {% if categories.number == i %}
+          <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+          <li><a href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+      {% endfor %}
+      {% if categories.has_next %}
+        <li><a href="?page={{ categories.next_page_number }}">&raquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>&raquo;</span></li>
+      {% endif %}
+    </ul>
+  {% endif %}
+</div>
+{% endblock %}
