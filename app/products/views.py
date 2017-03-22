@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from .models import Product, Category, CategoryProduct
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -31,19 +31,37 @@ def create_category(request):
     if request.POST:
         title = request.POST.get('title')
         parent_id = request.POST.get('parent_id')
-        create_category = Category(title=title, parent_id=parent_id)
-        categories_ceck = Category.objects.get(title=title)
 
-        if categories_ceck:
-            create_category.save()
-            return HttpResponseRedirect('/categories')
+        if parent_id:
+            create_category = Category(title=title, parent_id=parent_id)
         else:
-            return HttpResponse("Datasudah Exist")
+            create_category = Category(title=title)
+        create_category.save()
+
+        return HttpResponseRedirect('/categories')
 
     categories = Category.objects.all()
     return render(request, 'categories/create.html', {'categories': categories})
 
+def category_edit(request, pk):
+    category = Category.objects.get(id=pk)
+    categories = Category.objects.all()
+    if request.POST:
+        title = request.POST.get('title')
+        parent_id = request.POST.get('parent_id')
+        category.title = title
+        category.parent_id = parent_id
+        category.save()
+        return HttpResponseRedirect('/categories')
 
+    return render(request, 'categories/edit.html', {'category': category, 'categories': categories})
+
+def category_delete(request, pk):
+    category = Category.objects.get(id=pk)
+    category.delete()
+    return HttpResponseRedirect('/categories')
+
+#Products
 def products(request):
     try:
         products = Product.objects.all()
