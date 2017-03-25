@@ -11,5 +11,5 @@ urlpatterns = [
     url(r'^categories/delete/(?P<pk>\d+)$', views.category_delete, name='category_delete'),
 
     #Product
-    url(r'^products', views.products, name='products'),
+    url(r'^products', views.product_list, name='product_list'),
 ]

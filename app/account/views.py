@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'account/dashboard.html')
 
 def register(request):
     if request.POST:
@@ -36,4 +36,3 @@ def login(request):
         else:
             return HttpResponse("Login Gagal")
     return render(request, 'account/login.html')
- 

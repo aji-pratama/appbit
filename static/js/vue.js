@@ -4021,7 +4021,6 @@ function initGlobalAPI (Vue) {
   Object.defineProperty(Vue, 'config', configDef);
 
   // exposed util methods.
-  // NOTE: these are not considered part of the public API - avoid relying on
   // them unless you are aware of the risk.
   Vue.util = {
     warn: warn,
@@ -4555,7 +4554,6 @@ function createPatchFunction (backend) {
 
   function reactivateComponent (vnode, insertedVnodeQueue, parentElm, refElm) {
     var i;
-    // hack for #4339: a reactivated component with inner transition
     // does not trigger because the inner node's created hooks are not called
     // again. It's not ideal to involve module-specific logic in here but
     // there doesn't seem to be a better way to do it.
@@ -5130,7 +5128,6 @@ function updateAttrs (oldVnode, vnode) {
       setAttr(elm, key, cur);
     }
   }
-  // #4391: in IE9, setting type can reset value for input[type=radio]
   /* istanbul ignore if */
   if (isIE9 && attrs.value !== oldAttrs.value) {
     setAttr(elm, 'value', attrs.value);
@@ -8257,7 +8254,6 @@ var keyCodes = {
   'delete': [8, 46]
 };
 
-// #4868: modifiers that prevent the execution of the listener
 // need to explicitly return null so that we can determine whether to remove
 // the listener for .once
 var genGuard = function (condition) { return ("if(" + condition + ")return null;"); };
